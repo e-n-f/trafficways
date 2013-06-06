@@ -203,8 +203,9 @@ function updateLayer() {
 			'&opt=' + options + 
 			(wantBase ? ' -t 224' : '') + 
 			(wantAntialias ? '' : ' -a') +
-			(fours? ' -4' : '') +
+			(fours ? ' -4' : '') +
 			" -B" + dotBase + ":" + dotBright + ":" + dotRamp +
+			" -G" + gamma +
 			'&z={z}&x={x}&y={y}');
 	map.addLayer(theLayer);
 }
@@ -386,6 +387,21 @@ document.getElementById('twos').onclick = function() {
 	}
 
 	fours = false;
+	updateLayer();
+}
+
+document.getElementById('highgamma').onclick = function() {
+	gamma *= 1.25;
+	updateLayer();
+}
+
+document.getElementById('normalgamma').onclick = function() {
+	gamma = .5;
+	updateLayer();
+}
+
+document.getElementById('lowgamma').onclick = function() {
+	gamma /= 1.25;
 	updateLayer();
 }
 
