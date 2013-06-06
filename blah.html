@@ -78,8 +78,14 @@
         <ul>
             <li><a href='#' id='dots'>Dots</a></li>
             <li><a href='#' id='lines'>Lines</a></li>
-            <li><a href='#' id='speeds'>Speeds</a></li>
-            <li><a href='#' id='hash'>Hash</a></li>
+            <li><a href='#' id='speed'>Speed</a></li>
+            <li><a href='#' id='taxi'>Taxi</a></li>
+            <li><a href='#' id='tiger'>TIGER</a></li>
+            <li><a href='#' id='osm'>OSM</a></li>
+            <li><a href='#' id='world-edit'>OSM freshness</a></li>
+            <li><a href='#' id='census'>Census</a></li>
+            <li><a href='#' id='crowdflow'>Crowdflow</a></li>
+            <li><a href='#' id='flickr'>Flickr</a></li>
         </ul>
     </div>
 </div>
@@ -132,7 +138,7 @@ function toggle(control, element) {
 }
 
 document.getElementById('dots').onclick = function() {
-	currentLayer = "gps-points";
+	currentLayer = "gps-dots";
 	options = "";
 	updateLayer();
 };
@@ -143,21 +149,54 @@ document.getElementById('lines').onclick = function() {
 	updateLayer();
 };
 
-document.getElementById('speeds').onclick = function() {
+document.getElementById('speed').onclick = function() {
 	currentLayer = "gps-speed";
 	options = "-g -C3";
 	updateLayer();
 };
 
-document.getElementById('hash').onclick = function() {
-    if (this.className === 'active') {
-        hash.remove();
-        this.className = '';
-    } else {
-        hash.init(map);
-        this.className = 'active';
-    }
+document.getElementById('taxi').onclick = function() {
+	currentLayer = "taxi";
+	options = "";
+	updateLayer();
 };
+
+document.getElementById('tiger').onclick = function() {
+	currentLayer = "tiger";
+	options = "";
+	updateLayer();
+};
+
+document.getElementById('osm').onclick = function() {
+	currentLayer = "osm";
+	options = "";
+	updateLayer();
+};
+
+document.getElementById('world-edit').onclick = function() {
+	currentLayer = "world-edit";
+	options = "-C 3348";
+	updateLayer();
+};
+
+document.getElementById('census').onclick = function() {
+	currentLayer = "census";
+	options = "-C 8";
+	updateLayer();
+};
+
+document.getElementById('crowdflow').onclick = function() {
+	currentLayer = "crowdflow";
+	options = "-B 13:0.07:1.2";
+	updateLayer();
+};
+
+document.getElementById('flickr').onclick = function() {
+	currentLayer = "flickr";
+	options = "-B 14:.08:1.5";
+	updateLayer();
+};
+
 </script>
 </body>
 </html>
