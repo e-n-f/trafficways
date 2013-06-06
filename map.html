@@ -330,6 +330,21 @@ document.getElementById('fewerdots').onclick = function() {
 	updateLayer();
 };
 
+document.getElementById('brighter').onclick = function() {
+	dotBright *= 1.5;
+	updateLayer();
+};
+
+document.getElementById('normalbright').onclick = function() {
+	dotBright = 0.05917;
+	updateLayer();
+}
+
+document.getElementById('dimmer').onclick = function() {
+	dotBright /= 1.5;
+	updateLayer();
+}
+
 </script>
 </body>
 </html>
