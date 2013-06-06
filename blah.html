@@ -76,16 +76,17 @@
 <div id='map'>
     <div id='map-ui'>
         <ul>
-            <li><a href='#' id='dots'>Dots</a></li>
-            <li><a href='#' id='lines'>Lines</a></li>
-            <li><a href='#' id='speed'>Speed</a></li>
-            <li><a href='#' id='taxi'>Taxi</a></li>
+            <li><a href='#' id='dots'>GPS dots</a></li>
+            <li><a href='#' id='lines'>GPS lines</a></li>
+            <li><a href='#' id='speed'>GPS speed</a></li>
+            <li><a href='#' id='taxi'>Taxi Magic</a></li>
             <li><a href='#' id='tiger'>TIGER</a></li>
             <li><a href='#' id='osm'>OSM</a></li>
             <li><a href='#' id='world-edit'>OSM freshness</a></li>
-            <li><a href='#' id='census'>Census</a></li>
+            <li><a href='#' id='census'>US Census</a></li>
             <li><a href='#' id='crowdflow'>Crowdflow</a></li>
-            <li><a href='#' id='flickr'>Flickr</a></li>
+            <li><a href='#' id='flickr'>Flickr photos</a></li>
+            <li><a href='#' id='flight'>Flights</a></li>
         </ul>
     </div>
 </div>
@@ -194,6 +195,12 @@ document.getElementById('crowdflow').onclick = function() {
 document.getElementById('flickr').onclick = function() {
 	currentLayer = "flickr";
 	options = "-B 14:.08:1.5";
+	updateLayer();
+};
+
+document.getElementById('flight').onclick = function() {
+	currentLayer = "flight";
+	options = "-g -B9:0.08:2.1";
 	updateLayer();
 };
 
