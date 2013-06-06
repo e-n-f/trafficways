@@ -150,7 +150,7 @@ function updateLayer() {
 		map.addLayer(theBase);
 	}
 
-	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + 
+	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=' + currentLayer + 
 			'&opt=' + options + 
 			(wantBase ? ' -t 224' : '') + 
 			(wantAntialias ? '' : ' -a') +
