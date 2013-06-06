@@ -49,6 +49,7 @@
 				center.lng.toFixed(precision),
 				currentLayer,
 				options,
+				(wantBase ? 'base' : 'nobase'),
 			].join("/");
 		},
 

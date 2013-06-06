@@ -25,7 +25,7 @@
 
 #map-ui ul {
     list-style: none;
-    margin: 0;
+    margin: 5;
     padding: 0;
 }
 
@@ -88,6 +88,11 @@
             <li><a href='#' id='flickr'>Flickr photos</a></li>
             <li><a href='#' id='flight'>Flights</a></li>
         </ul>
+
+	<ul>
+            <li><a href='#' id='base'>Base map</a></li>
+            <li><a href='#' id='nobase'>No base map</a></li>
+	</ul>
     </div>
 </div>
 <script>
@@ -101,9 +106,16 @@ function parseHash(hash) {
 	if (args.length >= 5) {
 		options = args[4];
 	}
+	if (args.length >= 6) {
+		wantBase = (args[5] === 'base');
+	}
 }
 
 var map = L.mapbox.map('map');
+
+var theBase = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png');
+var wantBase = false;
+var hasBase = false;
 
 var currentLayer = "gps-points";
 var options = "";
@@ -120,7 +132,17 @@ function updateLayer() {
 		map.removeLayer(theLayer);
 	}
 
-	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + '&opt=' + options + '&z={z}&x={x}&y={y}');
+	if (wantBase) {
+		if (!map.hasLayer(theBase)) {
+			map.addLayer(theBase);
+		}
+	} else {
+		if (map.hasLayer(theBase)) {
+			map.removeLayer(theBase);
+		}
+	}
+
+	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + '&opt=' + options + (wantBase ? ' -t 224' : '') + '&z={z}&x={x}&y={y}');
 	map.addLayer(theLayer);
 }
 
@@ -201,6 +223,16 @@ document.getElementById('flickr').onclick = function() {
 document.getElementById('flight').onclick = function() {
 	currentLayer = "flight";
 	options = "-g -B9:0.08:2.1";
+	updateLayer();
+};
+
+document.getElementById('base').onclick = function() {
+	wantBase = true;
+	updateLayer();
+};
+
+document.getElementById('nobase').onclick = function() {
+	wantBase = false;
 	updateLayer();
 };
 
