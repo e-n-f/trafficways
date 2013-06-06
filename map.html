@@ -204,6 +204,7 @@ function updateLayer() {
 			(wantBase ? ' -t 224' : '') + 
 			(wantAntialias ? '' : ' -a') +
 			(fours ? ' -4' : '') +
+			(gps ? ' -g' : '') +
 			" -B" + dotBase + ":" + dotBright + ":" + dotRamp +
 			" -G" + gamma +
 			'&z={z}&x={x}&y={y}');
@@ -232,13 +233,14 @@ document.getElementById('dots').onclick = function() {
 
 document.getElementById('lines').onclick = function() {
 	currentLayer = "gps-lines";
-	options = "-g";
+	gps = true;
 	updateLayer();
 };
 
 document.getElementById('speed').onclick = function() {
 	currentLayer = "gps-speed";
-	options = "-g -C3";
+	gps = true;
+	options = " -C3";
 	updateLayer();
 };
 
@@ -274,19 +276,26 @@ document.getElementById('census').onclick = function() {
 
 document.getElementById('crowdflow').onclick = function() {
 	currentLayer = "crowdflow";
-	options = "-B 13:0.07:1.2";
+	dotBase = 13;
+	dotBright = 0.07;
+	dotRamp = 1.2;
 	updateLayer();
 };
 
 document.getElementById('flickr').onclick = function() {
 	currentLayer = "flickr";
-	options = "-B 14:.08:1.05";
+	dotBase = 14;
+	dotBright = 0.08;
+	dotRamp = 1.05;
 	updateLayer();
 };
 
 document.getElementById('flight').onclick = function() {
 	currentLayer = "flight";
-	options = "-g -B9:0.08:2.1";
+	dotBase = 9;
+	dotBright = 0.08;
+	dotRamp = 2.1;
+	gps = true;
 	updateLayer();
 };
 
@@ -402,6 +411,16 @@ document.getElementById('normalgamma').onclick = function() {
 
 document.getElementById('lowgamma').onclick = function() {
 	gamma /= 1.25;
+	updateLayer();
+}
+
+document.getElementById('gps').onclick = function() {
+	gps = true;
+	updateLayer();
+}
+
+document.getElementById('nogps').onclick = function() {
+	gps = false;
 	updateLayer();
 }
 
