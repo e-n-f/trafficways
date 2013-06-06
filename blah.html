@@ -39,7 +39,7 @@
     border: 1px solid #BBB;
     border-bottom-width: 0;
     min-width: 138px;
-    padding: 10px;
+    padding: 6px;
     text-decoration: none;
 }
 
@@ -81,10 +81,10 @@
             <li><a href='#' id='speed'>GPS speed</a></li>
             <li><a href='#' id='taxi'>Taxi Magic</a></li>
             <li><a href='#' id='tiger'>TIGER</a></li>
-            <li><a href='#' id='osm'>OSM</a></li>
+            <li><a href='#' id='osm'>OSM 2012</a></li>
             <li><a href='#' id='world-edit'>OSM freshness</a></li>
             <li><a href='#' id='census'>US Census</a></li>
-            <li><a href='#' id='crowdflow'>Crowdflow</a></li>
+            <li><a href='#' id='crowdflow'>Crowdflow iPhone</a></li>
             <li><a href='#' id='flickr'>Flickr photos</a></li>
             <li><a href='#' id='flight'>Flights</a></li>
         </ul>
@@ -194,7 +194,7 @@ document.getElementById('crowdflow').onclick = function() {
 
 document.getElementById('flickr').onclick = function() {
 	currentLayer = "flickr";
-	options = "-B 14:.08:1.5";
+	options = "-B 14:.08:1.05";
 	updateLayer();
 };
 
