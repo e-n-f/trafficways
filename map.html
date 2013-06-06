@@ -112,10 +112,10 @@
 	</ul>
 
 	<ul>
-            <li><a href='#' id='steeper'>Steeper</a></li>
-            <li><a href='#' id='normalramp'>Normal ramp</a></li>
-            <li><a href='#' id='shallower'>Shallower</a></li>
-            <li><a href='#' id='flatramp'>No ramp</a></li>
+            <li><a href='#' id='steeper'>Steeper dropoff</a></li>
+            <li><a href='#' id='normalramp'>Normal dropoff</a></li>
+            <li><a href='#' id='shallower'>Shallower dropoff</a></li>
+            <li><a href='#' id='flatramp'>No dropoff</a></li>
 	</ul>
 
 	<ul>
@@ -203,6 +203,7 @@ function updateLayer() {
 			'&opt=' + options + 
 			(wantBase ? ' -t 224' : '') + 
 			(wantAntialias ? '' : ' -a') +
+			(fours? ' -4' : '') +
 			" -B" + dotBase + ":" + dotBright + ":" + dotRamp +
 			'&z={z}&x={x}&y={y}');
 	map.addLayer(theLayer);
@@ -342,6 +343,49 @@ document.getElementById('normalbright').onclick = function() {
 
 document.getElementById('dimmer').onclick = function() {
 	dotBright /= 1.5;
+	updateLayer();
+}
+
+document.getElementById('steeper').onclick = function() {
+	dotRamp *= 1.05;
+	updateLayer();
+}
+
+document.getElementById('shallower').onclick = function() {
+	dotRamp /= 1.05;
+	updateLayer();
+}
+
+document.getElementById('normalramp').onclick = function() {
+	if (fours) {
+		dotRamp = 1.23 / 2;
+	} else {
+		dotRamp = 1.23;
+	}
+
+	updateLayer();
+}
+
+document.getElementById('flatramp').onclick = function() {
+	dotRamp = 1;
+	updateLayer();
+}
+
+document.getElementById('fours').onclick = function() {
+	if (!fours) {
+		dotRamp /= 2;
+	}
+
+	fours = true;
+	updateLayer();
+}
+
+document.getElementById('twos').onclick = function() {
+	if (fours) {
+		dotRamp *= 2;
+	}
+
+	fours = false;
 	updateLayer();
 }
 
