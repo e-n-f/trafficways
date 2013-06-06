@@ -101,6 +101,7 @@
 
 	<ul>
             <li><a href='#' id='moredots'>More dots</a></li>
+            <li><a href='#' id='normaldots'>Dots at z13</a></li>
             <li><a href='#' id='fewerdots'>Fewer dots</a></li>
 	</ul>
 
@@ -166,6 +167,15 @@ var hasBase = false;
 
 var wantAntialias = true;
 
+var dotBase = 13;
+var dotBright = .05917;
+var dotRamp = 1.23;
+
+var fours = false;
+var gps = false;
+var gamma = .5;
+var mercator = false;
+
 var currentLayer = "gps-dots";
 var options = "";
 parseHash(location.hash);
@@ -193,6 +203,7 @@ function updateLayer() {
 			'&opt=' + options + 
 			(wantBase ? ' -t 224' : '') + 
 			(wantAntialias ? '' : ' -a') +
+			" -B" + dotBase + ":" + dotBright + ":" + dotRamp +
 			'&z={z}&x={x}&y={y}');
 	map.addLayer(theLayer);
 }
@@ -294,6 +305,28 @@ document.getElementById('antialias').onclick = function() {
 
 document.getElementById('noantialias').onclick = function() {
 	wantAntialias = false;
+	updateLayer();
+};
+
+document.getElementById('moredots').onclick = function() {
+	dotBase--;
+	dotBright /= 2;
+	updateLayer();
+};
+
+document.getElementById('normaldots').onclick = function() {
+	if (dotBase > 13) {
+		dotBright /= 1 << (dotBase - 13);
+	} else {
+		dotBright *= 1 << (13 - dotBase);
+	}
+	dotBase = 13;
+	updateLayer();
+};
+
+document.getElementById('fewerdots').onclick = function() {
+	dotBase++;
+	dotBright *= 2;
 	updateLayer();
 };
 
