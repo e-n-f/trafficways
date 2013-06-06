@@ -18,19 +18,19 @@
 <style>
 #map-ui {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0px;
+    right: 5px;
     z-index: 100;
 }
 
 #map-ui ul {
     list-style: none;
-    margin: 5;
+    margin: 1;
     padding: 0;
 }
 
 #map-ui a {
-    font-size: 13px;
+    font-size: 10px;
     background: #FFF;
     color: #3C4E5A;
     display: block;
@@ -38,8 +38,8 @@
     padding: 0;
     border: 1px solid #BBB;
     border-bottom-width: 0;
-    min-width: 138px;
-    padding: 6px;
+    min-width: 100px;
+    padding: 0px;
     text-decoration: none;
 }
 
@@ -97,6 +97,45 @@
 	<ul>
             <li><a href='#' id='antialias'>Antialiased</a></li>
             <li><a href='#' id='noantialias'>Not antialiased</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='moredots'>More dots</a></li>
+            <li><a href='#' id='fewerdots'>Fewer dots</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='brighter'>Brighter</a></li>
+            <li><a href='#' id='normalbright'>Normal brightness</a></li>
+            <li><a href='#' id='dimmer'>Dimmer</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='steeper'>Steeper</a></li>
+            <li><a href='#' id='normalramp'>Normal ramp</a></li>
+            <li><a href='#' id='shallower'>Shallower</a></li>
+            <li><a href='#' id='flatramp'>No ramp</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='fours'>Drop dots by 4s</a></li>
+            <li><a href='#' id='twos'>Drop dots by 2s</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='gps'>GPS compensation</a></li>
+            <li><a href='#' id='nogps'>All lines are equal</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='highgamma'>Higher gamma</a></li>
+            <li><a href='#' id='normalgamma'>Normal gamma</a></li>
+            <li><a href='#' id='lowgamma'>Lower gamma</a></li>
+	</ul>
+
+	<ul>
+            <li><a href='#' id='mercator'>Brighten high latitudes</a></li>
+            <li><a href='#' id='nomercator'>Even brightness</a></li>
 	</ul>
     </div>
 </div>
