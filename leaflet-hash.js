@@ -50,6 +50,7 @@
 				currentLayer,
 				options,
 				(wantBase ? 'base' : 'nobase'),
+				(wantAntialias ? 'antialias' : 'noantialias'),
 			].join("/");
 		},
 

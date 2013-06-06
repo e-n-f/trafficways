@@ -93,6 +93,11 @@
             <li><a href='#' id='base'>Base map</a></li>
             <li><a href='#' id='nobase'>No base map</a></li>
 	</ul>
+
+	<ul>
+            <li><a href='#' id='antialias'>Antialiased</a></li>
+            <li><a href='#' id='noantialias'>Not antialiased</a></li>
+	</ul>
     </div>
 </div>
 <script>
@@ -109,6 +114,9 @@ function parseHash(hash) {
 	if (args.length >= 6) {
 		wantBase = (args[5] === 'base');
 	}
+	if (args.length >= 7) {
+		wantAntialias = !(args[6] === 'noantialias');
+	}
 }
 
 var map = L.mapbox.map('map');
@@ -117,7 +125,9 @@ var theBase = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png');
 var wantBase = false;
 var hasBase = false;
 
-var currentLayer = "gps-points";
+var wantAntialias = true;
+
+var currentLayer = "gps-dots";
 var options = "";
 parseHash(location.hash);
 
@@ -132,17 +142,19 @@ function updateLayer() {
 		map.removeLayer(theLayer);
 	}
 
-	if (wantBase) {
-		if (!map.hasLayer(theBase)) {
-			map.addLayer(theBase);
-		}
-	} else {
-		if (map.hasLayer(theBase)) {
-			map.removeLayer(theBase);
-		}
+	if (map.hasLayer(theBase)) {
+		map.removeLayer(theBase);
 	}
 
-	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + '&opt=' + options + (wantBase ? ' -t 224' : '') + '&z={z}&x={x}&y={y}');
+	if (wantBase) {
+		map.addLayer(theBase);
+	}
+
+	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + 
+			'&opt=' + options + 
+			(wantBase ? ' -t 224' : '') + 
+			(wantAntialias ? '' : ' -a') +
+			'&z={z}&x={x}&y={y}');
 	map.addLayer(theLayer);
 }
 
@@ -233,6 +245,16 @@ document.getElementById('base').onclick = function() {
 
 document.getElementById('nobase').onclick = function() {
 	wantBase = false;
+	updateLayer();
+};
+
+document.getElementById('antialias').onclick = function() {
+	wantAntialias = true;
+	updateLayer();
+};
+
+document.getElementById('noantialias').onclick = function() {
+	wantAntialias = false;
 	updateLayer();
 };
 
