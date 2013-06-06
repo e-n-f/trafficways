@@ -76,9 +76,9 @@
 <div id='map'>
     <div id='map-ui'>
         <ul>
-            <li><a href='#' id='zoomer' class='active'>Zoomer</a></li>
-            <li><a href='#' id='fullscreen'>Fullscreen</a></li>
-            <li><a href='#' id='attribution' class='active'>Attribution</a></li>
+            <li><a href='#' id='dots'>Dots</a></li>
+            <li><a href='#' id='lines'>Lines</a></li>
+            <li><a href='#' id='speeds'>Speeds</a></li>
             <li><a href='#' id='hash'>Hash</a></li>
         </ul>
     </div>
@@ -106,7 +106,19 @@ map.setView([51.5, 0], 5);
 var hash = L.hash(map);
 hash.update();
 
-map.addLayer(L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + '&opt=' + options + '&z={z}&x={x}&y={y}'));
+var theLayer = null;
+
+function updateLayer() {
+	if (theLayer != null) {
+		map.removeLayer(theLayer);
+	}
+
+	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + '&opt=' + options + '&z={z}&x={x}&y={y}');
+	map.addLayer(theLayer);
+}
+
+updateLayer();
+
 
 // Connect check boxes to ui functions
 function toggle(control, element) {
@@ -119,16 +131,22 @@ function toggle(control, element) {
     }
 }
 
-document.getElementById('zoomer').onclick = function() {
-    toggle(map.zoomControl, this);
+document.getElementById('dots').onclick = function() {
+	currentLayer = "gps-points";
+	options = "";
+	updateLayer();
 };
 
-document.getElementById('fullscreen').onclick = function() {
-    toggle(fullscreenControl, this);
+document.getElementById('lines').onclick = function() {
+	currentLayer = "gps-lines";
+	options = "-g";
+	updateLayer();
 };
 
-document.getElementById('attribution').onclick = function() {
-    toggle(map.attributionControl, this);
+document.getElementById('speeds').onclick = function() {
+	currentLayer = "gps-speed";
+	options = "-g -C3";
+	updateLayer();
 };
 
 document.getElementById('hash').onclick = function() {
