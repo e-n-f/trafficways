@@ -84,11 +84,29 @@
     </div>
 </div>
 <script>
+
+
+function parseHash(hash) {
+	var args = hash.split("/");
+	if (args.length >= 4) {
+		currentLayer = args[3];
+	}
+	if (args.length >= 5) {
+		options = args[4];
+	}
+}
+
 var map = L.mapbox.map('map');
-map.addLayer(L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/gps-points&z={z}&x={x}&y={y}'));
+
+var currentLayer = "gps-points";
+var options = "";
+parseHash(location.hash);
+
 map.setView([51.5, 0], 5);
 var hash = L.hash(map);
 hash.update();
+
+map.addLayer(L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=shapes/' + currentLayer + '&opt=' + options + '&z={z}&x={x}&y={y}'));
 
 // Connect check boxes to ui functions
 function toggle(control, element) {
