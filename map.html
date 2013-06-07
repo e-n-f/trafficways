@@ -30,7 +30,7 @@
 }
 
 #map-ui a {
-    font-size: 9px;
+    font-size: 10px;
     background: #FFF;
     color: #3C4E5A;
     display: block;
@@ -133,10 +133,12 @@
             <li><a href='#' id='nobase'>No base map</a></li>
 	</ul>
 
+	<!--
 	<ul>
             <li><a href='#' id='mercator'>Brighten high latitudes</a></li>
             <li><a href='#' id='nomercator'>Even brightness</a></li>
 	</ul>
+	-->
 
 	<ul>
             <li><a href='#' id='reset'>Reset</a></li>
@@ -466,14 +468,16 @@ document.getElementById('nogps').onclick = function() {
 	updateLayer();
 }
 
-document.getElementById('mercator').onclick = function() {
-	mercator = true;
-	updateLayer();
-}
+if (false) {
+	document.getElementById('mercator').onclick = function() {
+		mercator = true;
+		updateLayer();
+	}
 
-document.getElementById('nomercator').onclick = function() {
-	mercator = false;
-	updateLayer();
+	document.getElementById('nomercator').onclick = function() {
+		mercator = false;
+		updateLayer();
+	}
 }
 
 document.getElementById('reset').onclick = function() {
