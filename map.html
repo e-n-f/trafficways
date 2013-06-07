@@ -192,6 +192,7 @@ var hasBase = false;
 
 var currentLayer = "gps-dots";
 var theLayer = null;
+var theAttribution = null;
 
 function reset() {
 	wantBase = false;
@@ -228,18 +229,37 @@ map.setView([51.5, 0], 5);
 var hash = L.hash(map);
 hash.update();
 
+map.attributionControl.addTo(map);
+map.attributionControl.addAttribution("Visualization by Eric Fischer");
+
+var attributions = {
+	"gps-dots": "Data &copy; OpenStreetMap Contributors, CC-BY-SA",
+	"gps-lines": "Data &copy; OpenStreetMap Contributors, ODbL",
+	"osm": "Data &copy; OpenStreetMap Contributors, CC-BY-SA",
+	"taxi": "Data from the Taxi Magic API",
+	"census": "Data from US Census 2010",
+	"world-edit": "Data &copy; OpenStreetMap Contributors, ODbL. OSM data report, http://www.mapbox.com/osm-data-report/",
+	"flickr": "Data from the Flickr search API",
+	"flight": "Data from US air traffic control",
+	"gps-speed": "Data &copy; OpenStreetMap Contributors, ODbL",
+	"tiger": "Data from US Census redistricting maps, 2013",
+	"crowdflow": "Data from crowdflow.net",
+};
 
 function updateLayer() {
 	if (theLayer != null) {
 		map.removeLayer(theLayer);
+		map.attributionControl.removeAttribution(theAttribution);
 	}
 
 	if (map.hasLayer(theBase)) {
 		map.removeLayer(theBase);
+		map.attributionControl.removeAttribution("Toner tiles &copy; Stamen Design, OpenStreetMap Contributors, CC-BY-SA");
 	}
 
 	if (wantBase) {
 		map.addLayer(theBase);
+		map.attributionControl.addAttribution("Toner tiles &copy; Stamen Design, OpenStreetMap Contributors, CC-BY-SA");
 	}
 
 	theLayer = L.tileLayer('http://209.59.162.31/cgi-bin/tile.cgi?map=' + currentLayer + 
@@ -253,6 +273,12 @@ function updateLayer() {
 			" -G" + gamma +
 			'&z={z}&x={x}&y={y}');
 	map.addLayer(theLayer);
+
+	theAttribution = attributions[currentLayer];
+
+	if (theAttribution != null) {
+		map.attributionControl.addAttribution(theAttribution);
+	}
 }
 
 updateLayer();
@@ -296,18 +322,21 @@ document.getElementById('taxi').onclick = function() {
 
 document.getElementById('tiger').onclick = function() {
 	currentLayer = "tiger";
+	gps = false;
 	options = "";
 	updateLayer();
 };
 
 document.getElementById('osm').onclick = function() {
 	currentLayer = "osm";
+	gps = false;
 	options = "";
 	updateLayer();
 };
 
 document.getElementById('world-edit').onclick = function() {
 	currentLayer = "world-edit";
+	gps = false;
 	options = "-C 3348";
 	updateLayer();
 };
