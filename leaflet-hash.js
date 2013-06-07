@@ -48,9 +48,16 @@
 				center.lat.toFixed(precision),
 				center.lng.toFixed(precision),
 				currentLayer,
-				options,
 				(wantBase ? 'base' : 'nobase'),
+				dotBase,
+				dotBright,
+				dotRamp,
+				gamma,
+				(fours ? 'fours' : 'twos'),
 				(wantAntialias ? 'antialias' : 'noantialias'),
+				(gps ? 'gps' : 'nogps'),
+				(mercator ? 'mercator' : 'nomercator'),
+				options,
 			].join("/");
 		},
 
