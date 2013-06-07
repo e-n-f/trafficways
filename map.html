@@ -187,29 +187,46 @@ function parseHash(hash) {
 var map = L.mapbox.map('map');
 
 var theBase = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png');
-var wantBase = false;
 var hasBase = false;
 
-var wantAntialias = true;
-
-var dotBase = 13;
-var dotBright = .05917;
-var dotRamp = 1.23;
-
-var fours = false;
-var gps = false;
-var gamma = .5;
-var mercator = false;
-
 var currentLayer = "gps-dots";
+var theLayer = null;
+
+function reset() {
+	wantBase = false;
+	wantAntialias = true;
+
+	dotBase = 13;
+	dotBright = .05917;
+	dotRamp = 1.23;
+
+	fours = false;
+	gps = false;
+	gamma = .5;
+	mercator = false;
+}
+
+var wantBase;
+var wantAntialias;
+
+var dotBase;
+var dotBright;
+var dotRamp;
+
+var fours;
+var gps;
+var gamma;
+var mercator;
+
 var options = "";
+
+reset();
 parseHash(location.hash);
 
 map.setView([51.5, 0], 5);
 var hash = L.hash(map);
 hash.update();
 
-var theLayer = null;
 
 function updateLayer() {
 	if (theLayer != null) {
@@ -457,6 +474,11 @@ document.getElementById('mercator').onclick = function() {
 
 document.getElementById('nomercator').onclick = function() {
 	mercator = false;
+	updateLayer();
+}
+
+document.getElementById('reset').onclick = function() {
+	reset();
 	updateLayer();
 }
 
