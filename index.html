@@ -89,6 +89,7 @@
             <li><a href='#' id='speed'>GPS speed</a></li>
             <li><a href='#' id='tiger'>TIGER streets</a></li>
             <li><a href='#' id='crowdflow'>Crowdflow iPhone</a></li>
+            <li><a href='#' id='skobbler'>Skobbler GPS lines</a></li>
         </ul>
 
 	<ul>
@@ -247,6 +248,7 @@ var attributions = {
 	"gps-speed": "Data &copy; OpenStreetMap Contributors, ODbL",
 	"tiger": "Data from US Census redistricting maps, 2013",
 	"crowdflow": "Data from crowdflow.net",
+	"skobbler": "Data &copy; http://heatmap.skobbler.net/gpx_download.html, ODbL",
 };
 
 function updateLayer() {
@@ -355,6 +357,15 @@ document.getElementById('crowdflow').onclick = function() {
 	dotBase = 13;
 	dotBright = 0.07;
 	dotRamp = 1.2;
+	updateLayer();
+};
+
+document.getElementById('skobbler').onclick = function() {
+	currentLayer = "skobbler";
+	dotBase = 13;
+	dotBright = .02;
+	dotRamp = .85;
+	gps = true;
 	updateLayer();
 };
 
